@@ -19,9 +19,6 @@ public:
 
 private:
 	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxDegreesPerSecond = 5;
-
-	UPROPERTY(EditAnywhere, Category = Setup)
-		float MaxRotation = 120;
+		float MaxDegreesPerSecond = 20;
 	
 };

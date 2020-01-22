@@ -1,22 +1,14 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Tank.h"
 #include "TankPlayerController.h"
+#include "Tank.h"
+#include "TankAimingComponent.h"
 #include "GameFramework/Actor.h"
 
 
 void ATankPlayerController::BeginPlay()
 {
 	Super::BeginPlay();
-	auto ControlledTank = GetControlledTank();
-
-	if (!ControlledTank){
-		UE_LOG(LogTemp, Error, TEXT("PlayerController Tank was not initialized"));
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("PlayerController Tank: %s"), *ControlledTank->GetName());
-	}
 }
 
 void ATankPlayerController::Tick(float DeltaTime)
@@ -41,7 +33,8 @@ void ATankPlayerController::AimTowardsCrosshair()
 
 	if (GetSightRayHitLocation(HitLocation))
 	{
-		GetControlledTank()->AimAt(HitLocation);
+		auto AimingComponent = GetControlledTank()->FindComponentByClass<UTankAimingComponent>();
+		Cast<UTankAimingComponent>(AimingComponent)->AimAt(HitLocation);
 	}
 }
 
